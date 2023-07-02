@@ -20,7 +20,7 @@ const addLink = async (req, res)=> {
   let link = new Link(req.body);
   try {
     let doc = await link.save();
-    res.send("Link successfully added");
+    res.redirect("/")
   } catch (error) {
     res.render("index");
   }
@@ -48,7 +48,7 @@ const deleteLink = async (req, res)=> {
   }
    try {
     await Link.findByIdAndDelete(id)
-    res.redirect("/all")
+    res.redirect("/")
    } catch (error) {
     res.status(404).send(error)
      
