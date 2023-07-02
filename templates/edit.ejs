@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Edit link</title>
+</head>
+
+<body>
+
+  <h2>Edit link</h2>
+
+  <form action="/edit/<%=body.id%>" method="POST">
+    <input class="field" name="title" placeholder="title" required value="<%=body.title%>">
+    <input class="field" name="description" placeholder="description" value="<%=body.description%>">
+    <input class="field" name="url" placeholder="URL" required value="<%=body.url%>">
+    <button>Edit</button>
+  </form>
+  
+</body>
+
+</html>
