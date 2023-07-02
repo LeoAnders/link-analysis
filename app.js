@@ -11,6 +11,10 @@ let db = mongoose.connection
 
 db.on("error", ()=> {console.log("Error connecting to database");})
 db.once("open", ()=> {console.log("Connected to database");})
+
+app.set("view engine", "ejs")
+app.set("views", path.join(__dirname, "templates"))
+
 app.use("/", linkRoute)
 
 app.listen(port, ()=> console.log(`Server running on port ${port}`))
