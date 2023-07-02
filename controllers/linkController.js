@@ -1,11 +1,15 @@
 const Link = require("../models/Link");
 
-const redirect = async (req, res)=> {
+const redirect = async (req, res, next)=> {
   let title = req.params.title;
-
   try {
     let doc = await Link.findOne({ title });
-    res.redirect(doc.url);
+    if(doc){
+      res.redirect(doc.url);
+    }
+    else{
+      next()
+    }
   } catch (error) {
     res.send("Error retrieving link: " + error);
   }
@@ -14,14 +18,28 @@ const redirect = async (req, res)=> {
 
 const addLink = async (req, res)=> {
   let link = new Link(req.body);
-
   try {
     let doc = await link.save();
     res.send("Link successfully added");
   } catch (error) {
-    res.send(error)
+    res.render("index");
   }
 }
 
-module.exports = { redirect, addLink };
+const allLinks = async (req, res)=> {
+  try{
+    let links = await Link.find({});
+    if (links !== null) {
+      res.render("all", { links });
+    } else {
+      res.send("No links found");
+    }
+
+  }catch (error){
+    res.send(error)
+
+  }
+}
+
+module.exports = { redirect, addLink, allLinks };
 
