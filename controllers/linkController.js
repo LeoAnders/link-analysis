@@ -28,18 +28,33 @@ const addLink = async (req, res)=> {
 
 const allLinks = async (req, res)=> {
   try{
-    let links = await Link.find({});
-    if (links !== null) {
-      res.render("all", { links });
+    let docs = await Link.find({});
+    if (docs !== null) {
+      res.render("all", { links: docs });
     } else {
       res.send("No links found");
     }
-
   }catch (error){
     res.send(error)
 
   }
 }
 
-module.exports = { redirect, addLink, allLinks };
+
+const deleteLink = async (req, res)=> {
+  let id = req.params.id
+  if(!id){
+    id = req.body.id
+  }
+   try {
+    await Link.findByIdAndDelete(id)
+    res.redirect("/all")
+   } catch (error) {
+    res.status(404).send(error)
+     
+   }
+ 
+ }
+
+module.exports = { redirect, addLink, allLinks, deleteLink };
 
