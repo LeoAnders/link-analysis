@@ -6,7 +6,6 @@ router.use(methodOverride('_method'))
 const linkController = require("../controllers/linkController")
 
 router.get("/", linkController.allLinks)
-router.get("/add", (req, res)=> res.render("index"))
 router.get("/:title", linkController.redirect)
 router.get('/edit/:id', linkController.loadLink)
 

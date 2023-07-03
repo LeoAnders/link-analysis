@@ -22,7 +22,7 @@ const addLink = async (req, res)=> {
     let doc = await link.save();
     res.redirect("/")
   } catch (error) {
-    res.render("index");
+    res.render("all");
   }
 }
 
